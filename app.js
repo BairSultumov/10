@@ -1,36 +1,26 @@
 const express = require("express");
-
 const app = express();
+const fs = require("fs");
+const bodyParser = require("body-parser");
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const multer = require("multer")
+const upload = multer();
 
-function color() {
-    let r = Math.round(Math.random() * 255)
-    let g = Math.round(Math.random() * 255)
-    let b = Math.round(Math.random() * 255)
-    return `rgb(${r},${g},${b})`
-}
-
-app.get(function (request, response, next) {
-    let d = new Date().toLocaleTimeString
-    console.log(`${d} : ${request.url}`)
-    next();
-});
 
 app.get("/", function (request, response) {
-    response.sendFile(__dirname + "/index.html")
+    response.sendFile(__dirname+"/1/index.html");
 });
 
-app.get("/data", function (request, response) {
-    let str = ""
-    let mas = request.query.mas
-    for (let i = 0; i < mas.length; i++)
-        str += "<p>" + mas[i] + "</p>"
-    response.send(str)
+app.post("/getData", upload.fields([]), (request, response) => {
+    if (!request.body)
+        return response.sendStatus(400);
+    response.send(arr[request.body.data - 1]);
 });
 
-app.get("*", function (request, response, next) {
-    let size = Math.round(Math.random() * 15) + 5
-    response.send(`<h1 style="font-size:${size}">Страница не найдена</h1>`)
+app.get("/getTable", (request, response) => {
+    response.send(table);
 });
-app.listen(3000,()=>
-    console.log("Сервер начал прослушивание на порту 3000 ULTRA HD MAX LED IPHONE XIAOMI REDMI PLUS MAXI дайте 100 рублей")
-);
+
+app.listen(3000, function () {
+    console.log("Сервер запущен. Порт 3000")
+});

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>METANIT.COM</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function User() {
+      const [user, setUser] = React.useState({ name: "Tom", age: 36 });
+      function handleNameChange(event) {
+        setUser({ name: event.target.value, age: user.age });
+      }
+      function handleAgeChange(event) {
+        setUser({ name: user.name, age: event.target.value });
+      }
+      return (<div>
+        <h3>Имя: {user.name}</h3>
+        <h3>Возраст: {user.age}</h3>
+        <div>
+          <p>Имя: <input type="text" value={user.name} onChange={handleNameChange} />
+          </p>
+          <p>Возраст: <input type="number" value={user.age} onChange={handleAgeChange} /></p>
+          6</div>
+      </div>);
+    }
+
+    ReactDOM.createRoot(
+      document.getElementById("app")
+    )
+      .render(
+        <UserForm />
+      );
+
+  </script>
+</body>
+
+</html>
